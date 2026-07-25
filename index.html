@@ -294,115 +294,129 @@
       background: var(--bg-card);
       border: 1px solid var(--border);
       border-radius: 10px;
-      padding: 28px 28px 24px;
+      padding: 28px;
       display: flex;
       flex-direction: column;
+      gap: 16px;
       transition: var(--transition);
       position: relative;
       overflow: hidden;
     }
     .project-card.featured {
       grid-column: 1 / -1;
+      flex-direction: row;
+      gap: 40px;
+      align-items: stretch;
     }
     .project-card::after {
       content: '';
       position: absolute;
       top: 0; left: 0; right: 0;
-      height: 3px;
-      background: linear-gradient(90deg, var(--teal), transparent);
+      height: 2px;
+      background: linear-gradient(90deg, var(--teal) 0%, transparent 100%);
       opacity: 0;
       transition: var(--transition);
     }
-    .project-card:hover {
-      border-color: rgba(100,255,218,0.25);
-      transform: translateY(-4px);
-      box-shadow: 0 16px 40px rgba(0,0,0,0.35);
-    }
+    .project-card:hover { border-color: rgba(100,255,218,0.3); transform: translateY(-3px); box-shadow: 0 14px 36px rgba(0,0,0,0.3); }
     .project-card:hover::after { opacity: 1; }
 
-    .project-header {
-      display: flex;
-      align-items: flex-start;
-      justify-content: space-between;
-      margin-bottom: 16px;
-    }
-    .project-num {
-      font-family: var(--mono);
-      font-size: 13px;
-      color: var(--teal);
-      letter-spacing: 1px;
-      font-weight: 500;
-    }
-    .project-gh {
-      color: var(--slate);
-      transition: var(--transition);
-      display: flex;
-      align-items: center;
-      gap: 6px;
-    }
-    .project-gh:hover { color: var(--teal); }
-
-    .project-name {
-      font-size: 19px;
-      font-weight: 700;
-      color: var(--lightest);
-      margin-bottom: 6px;
-      transition: var(--transition);
-      line-height: 1.3;
-    }
-    .project-card:hover .project-name { color: var(--teal); }
-
-    .project-tagline {
-      font-size: 13px;
-      font-family: var(--mono);
-      color: var(--slate);
-      margin-bottom: 20px;
-      line-height: 1.5;
-    }
-
-    .project-callouts {
-      display: grid;
-      grid-template-columns: repeat(3, 1fr);
-      gap: 10px;
-      margin-bottom: 22px;
+    /* featured card: left content pane */
+    .project-left {
       flex: 1;
+      display: flex;
+      flex-direction: column;
+      gap: 14px;
+      min-width: 0;
     }
-    .featured .project-callouts {
-      grid-template-columns: repeat(3, 1fr);
+    /* featured card: right chips pane */
+    .project-right {
+      width: 260px;
+      flex-shrink: 0;
+      display: flex;
+      flex-direction: column;
+      gap: 8px;
+      justify-content: center;
     }
-    .callout {
-      background: rgba(29,53,87,0.45);
-      border: 1px solid rgba(100,255,218,0.08);
-      border-radius: 6px;
-      padding: 12px 14px;
-    }
-    .callout-label {
+    .project-right-label {
       font-family: var(--mono);
       font-size: 10px;
       color: var(--teal);
       text-transform: uppercase;
-      letter-spacing: 1.2px;
-      margin-bottom: 5px;
+      letter-spacing: 1.5px;
+      margin-bottom: 4px;
     }
-    .callout-text {
-      font-size: 12.5px;
-      color: var(--light-slate);
-      line-height: 1.5;
+
+    .project-header {
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
     }
+    .project-num {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--teal);
+      letter-spacing: 1px;
+    }
+    .project-gh {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--slate);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      transition: var(--transition);
+    }
+    .project-gh:hover { color: var(--teal); }
+
+    .project-name {
+      font-size: 18px;
+      font-weight: 700;
+      color: var(--lightest);
+      line-height: 1.3;
+      transition: var(--transition);
+    }
+    .project-card:hover .project-name { color: var(--teal); }
 
     .project-desc {
       font-size: 14px;
-      line-height: 1.7;
+      line-height: 1.65;
       color: var(--slate);
-      margin-bottom: 22px;
-      flex: 1;
     }
     .project-desc strong { color: var(--light-slate); }
+
+    /* Feature chips — short labels, no sentences */
+    .feature-chips {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+    }
+    .chip {
+      font-family: var(--mono);
+      font-size: 12px;
+      color: var(--light-slate);
+      background: rgba(29,53,87,0.6);
+      border: 1px solid var(--border);
+      border-radius: 4px;
+      padding: 5px 12px;
+      white-space: nowrap;
+    }
+    /* vertical chips in featured right pane */
+    .project-right .chip {
+      display: block;
+      white-space: normal;
+      font-size: 12.5px;
+      padding: 8px 12px;
+      border-left: 2px solid var(--teal);
+      border-radius: 0 4px 4px 0;
+      background: rgba(100,255,218,0.04);
+      border-color: transparent;
+      border-left-color: var(--teal);
+    }
 
     .tech-list {
       display: flex;
       flex-wrap: wrap;
-      gap: 8px;
+      gap: 7px;
       list-style: none;
       margin-top: auto;
     }
@@ -412,7 +426,7 @@
       color: var(--teal);
       background: var(--teal-dark);
       border: 1px solid rgba(100,255,218,0.12);
-      padding: 3px 10px;
+      padding: 3px 9px;
       border-radius: 3px;
     }
 
@@ -662,8 +676,10 @@
       .side-links, .side-email { display: none; }
 
       .projects-grid { grid-template-columns: 1fr; }
-      .project-callouts { grid-template-columns: 1fr 1fr; }
-      .featured .project-callouts { grid-template-columns: 1fr 1fr; }
+      .project-card.featured { flex-direction: column; }
+      .project-right { width: 100%; }
+      .project-right .chip { display: inline-block; }
+      .project-right .feature-chips { display: flex; flex-wrap: wrap; }
     }
 
     @media (max-width: 480px) {
@@ -791,62 +807,61 @@
       <h2 class="section-heading reveal"><span class="num">02.</span>Featured Projects</h2>
       <div class="projects-grid">
 
-        <!-- Tickera — featured full-width -->
+        <!-- Tickera — featured full-width, 2-column interior -->
         <div class="project-card featured reveal">
-          <div class="project-header">
-            <span class="project-num">01 &mdash; Distributed Systems</span>
-            <a href="https://github.com/pavankumarale-hub/tickera" target="_blank" rel="noopener" class="project-gh" aria-label="View on GitHub">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
-              </svg>
-              View on GitHub
-            </a>
+          <div class="project-left">
+            <div class="project-header">
+              <span class="project-num">01 &mdash; Distributed Systems</span>
+              <a href="https://github.com/pavankumarale-hub/tickera" target="_blank" rel="noopener" class="project-gh">
+                <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
+                GitHub
+              </a>
+            </div>
+            <div class="project-name">Tickera — Event-Driven Ticket Booking</div>
+            <p class="project-desc">
+              5-service microservices system built around the problems that come after CRUD:
+              <strong>event sourcing</strong>, saga compensation with deadlines, idempotency under at-least-once Kafka delivery,
+              and <strong>contract testing on async boundaries</strong>. Includes a React 18 live dashboard.
+            </p>
+            <ul class="tech-list">
+              <li>Java 17</li><li>Spring Boot 3.2</li><li>Axon 4.9</li><li>Kafka</li>
+              <li>Redis</li><li>PostgreSQL</li><li>Pact V3</li><li>Testcontainers</li>
+              <li>React 18</li><li>Prometheus</li><li>Grafana</li>
+            </ul>
           </div>
-          <div class="project-name">Tickera — Event-Driven Ticket Booking</div>
-          <p class="project-tagline">5-service microservices system · CQRS + Event Sourcing · Saga compensation · Pact CDC · React 18 live dashboard</p>
-          <div class="project-callouts">
-            <div class="callout">
-              <div class="callout-label">Saga Compensation</div>
-              <div class="callout-text">15-min Axon deadline auto-fires CancelBooking when payment never arrives — explicit timeout, not a silent assumption.</div>
-            </div>
-            <div class="callout">
-              <div class="callout-label">Idempotency</div>
-              <div class="callout-text">Redis SETNX before acting on every inbound Kafka event — exactly-once payment under at-least-once delivery.</div>
-            </div>
-            <div class="callout">
-              <div class="callout-label">Contract Testing</div>
-              <div class="callout-text">Pact V3 async CDC makes BookingConfirmed a versioned contract. 3-job CI: unit ∥ contract ∥ integration → SonarQube.</div>
+          <div class="project-right">
+            <div class="project-right-label">Key Engineering Decisions</div>
+            <div class="feature-chips">
+              <span class="chip">CQRS + Event Sourcing</span>
+              <span class="chip">Saga Deadline Compensation</span>
+              <span class="chip">Redis SETNX Idempotency</span>
+              <span class="chip">Pact V3 Async CDC</span>
+              <span class="chip">3-job CI: unit ∥ contract ∥ integration</span>
+              <span class="chip">React 18 Live Dashboard</span>
             </div>
           </div>
-          <ul class="tech-list">
-            <li>Java 17</li><li>Spring Boot 3.2</li><li>Axon 4.9</li><li>Kafka</li>
-            <li>Redis</li><li>PostgreSQL</li><li>Pact V3</li><li>Testcontainers</li>
-            <li>React 18</li><li>Prometheus</li><li>Grafana</li>
-          </ul>
         </div>
 
         <!-- LogSense -->
         <div class="project-card reveal">
           <div class="project-header">
             <span class="project-num">02 &mdash; AI Engineering</span>
-            <a href="https://github.com/pavankumarale-hub/logsense" target="_blank" rel="noopener" class="project-gh" aria-label="View on GitHub">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
-              </svg>
+            <a href="https://github.com/pavankumarale-hub/logsense" target="_blank" rel="noopener" class="project-gh">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
               GitHub
             </a>
           </div>
           <div class="project-name">LogSense — AI Log RCA Agent</div>
-          <p class="project-tagline">Raw logs → Drain clustering → risk scoring → LLM root cause — surfaced as 4 MCP tools inside any AI assistant.</p>
-          <div class="project-callouts" style="grid-template-columns: 1fr;">
-            <div class="callout">
-              <div class="callout-label">Drain → LLM Pipeline</div>
-              <div class="callout-text">Deterministic Drain clustering reserves LLM budget purely for RCA. Calibrated confidence (0–1) in a single-pass JSON response — no second call.</div>
-            </div>
-            <div class="callout">
-              <div class="callout-label">Dual Interface</div>
-              <div class="callout-text">Same pipeline exposed as FastAPI REST and MCP stdio (4 tools: ingest, triage, rca, draft). AI-native and human-callable without forking the codebase.</div>
-            </div>
+          <p class="project-desc">
+            Ingests raw logs, clusters errors via <strong>Drain</strong>, scores by risk, and generates
+            LLM root cause hypotheses — exposed as 4 MCP tools usable directly inside any AI assistant.
+          </p>
+          <div class="feature-chips">
+            <span class="chip">Drain Log Clustering</span>
+            <span class="chip">Composite Risk Scoring</span>
+            <span class="chip">Calibrated LLM Confidence</span>
+            <span class="chip">MCP + REST Dual Interface</span>
+            <span class="chip">GitHub / Jira Output</span>
           </div>
           <ul class="tech-list">
             <li>Python 3.11+</li><li>FastAPI</li><li>LLM API</li><li>MCP Server</li>
@@ -858,24 +873,22 @@
         <div class="project-card reveal">
           <div class="project-header">
             <span class="project-num">03 &mdash; Observability</span>
-            <a href="https://github.com/pavankumarale-hub/txsentry" target="_blank" rel="noopener" class="project-gh" aria-label="View on GitHub">
-              <svg viewBox="0 0 24 24" width="18" height="18" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/>
-              </svg>
+            <a href="https://github.com/pavankumarale-hub/txsentry" target="_blank" rel="noopener" class="project-gh">
+              <svg viewBox="0 0 24 24" width="14" height="14" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M9 19c-5 1.5-5-2.5-7-3m14 6v-3.87a3.37 3.37 0 0 0-.94-2.61c3.14-.35 6.44-1.54 6.44-7A5.44 5.44 0 0 0 20 4.77 5.07 5.07 0 0 0 19.91 1S18.73.65 16 2.48a13.38 13.38 0 0 0-7 0C6.27.65 5.09 1 5.09 1A5.07 5.07 0 0 0 5 4.77a5.44 5.44 0 0 0-1.5 3.78c0 5.42 3.3 6.61 6.44 7A3.37 3.37 0 0 0 9 18.13V22"/></svg>
               GitHub
             </a>
           </div>
           <div class="project-name">TxSentry — Transaction Anomaly Scoring</div>
-          <p class="project-tagline">Rule-based + statistical composite scoring on financial transactions · every score ships with an inline explanation.</p>
-          <div class="project-callouts" style="grid-template-columns: 1fr;">
-            <div class="callout">
-              <div class="callout-label">Composite Scoring</div>
-              <div class="callout-text">70% rule engine (velocity, 3σ amount, impossible travel) + 30% Z-score + Tukey IQR — computed per-account, not global thresholds.</div>
-            </div>
-            <div class="callout">
-              <div class="callout-label">Business Observability</div>
-              <div class="callout-text">5 custom Prometheus metrics (risk tier distribution, rule trigger rates, scoring latency). Grafana dashboard + alerting rules on docker compose up.</div>
-            </div>
+          <p class="project-desc">
+            Rule-based + statistical composite engine that scores financial transactions and ships
+            every result with a full <strong>inline explanation</strong> and 5 custom Prometheus business metrics.
+          </p>
+          <div class="feature-chips">
+            <span class="chip">70% Rule + 30% Z-score / IQR</span>
+            <span class="chip">Per-Account Thresholds</span>
+            <span class="chip">Inline Explanation Audit</span>
+            <span class="chip">5 Custom Prometheus Metrics</span>
+            <span class="chip">Grafana Dashboard Provisioned</span>
           </div>
           <ul class="tech-list">
             <li>Python</li><li>FastAPI</li><li>Prometheus</li><li>Grafana</li>
